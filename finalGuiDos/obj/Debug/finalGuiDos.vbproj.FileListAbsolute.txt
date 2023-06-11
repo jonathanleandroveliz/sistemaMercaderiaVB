@@ -21,7 +21,6 @@ C:\Users\Presentacion\Desktop\finalGuiDos\finalGuiDos\bin\Debug\finalGuiDos.pdb
 C:\Users\Presentacion\Desktop\finalGuiDos\finalGuiDos\bin\Debug\finalGuiDos.xml
 C:\Users\Presentacion\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.vbproj.AssemblyReference.cache
 C:\Users\Presentacion\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmAgrupacion.resources
-C:\Users\Presentacion\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmAltasYActualizaciones.resources
 C:\Users\Presentacion\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmArticulos.resources
 C:\Users\Presentacion\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmMovimientos.resources
 C:\Users\Presentacion\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmPrincipal.resources
@@ -39,7 +38,6 @@ C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\bin\Debug\finalGuiDos.xml
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.vbproj.AssemblyReference.cache
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.vbproj.SuggestedBindingRedirects.cache
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmAgrupacion.resources
-C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmAltasYActualizaciones.resources
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmArticulos.resources
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmMovimientos.resources
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmPrincipal.resources
@@ -50,3 +48,20 @@ C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.vbpro
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.exe
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.xml
 C:\Users\Toto\Desktop\GUI2VB\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.pdb
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\bin\Debug\finalGuiDos.exe.config
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\bin\Debug\finalGuiDos.exe
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\bin\Debug\finalGuiDos.pdb
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\bin\Debug\finalGuiDos.xml
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.vbproj.AssemblyReference.cache
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.vbproj.SuggestedBindingRedirects.cache
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmAgrupacion.resources
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmArticulos.resources
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmMovimientos.resources
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmPrincipal.resources
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.frmTiposMovimientos.resources
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.Resources.resources
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.vbproj.GenerateResource.cache
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.vbproj.CoreCompileInputs.cache
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.exe
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.xml
+C:\Users\Toto\Desktop\finalGuiDos\finalGuiDos\obj\Debug\finalGuiDos.pdb

@@ -5,6 +5,11 @@ Public Class frmAgrupacion
         ConectarBase()
         Me.BotonLimpiar()
         Me.txtID.TextAlign = HorizontalAlignment.Right
+        Me.BackColor = Color.Beige
+        Me.lstAgrupacion.BackColor = Color.AntiqueWhite
+        Me.GroupBox1.BackColor = Color.AntiqueWhite
+        Me.GroupBox2.BackColor = Color.AntiqueWhite
+        Me.txtNombreAgrupacion.TextAlign = HorizontalAlignment.Left
     End Sub
 
     Private Sub frmAgrupacion_Closed(sender As Object, e As EventArgs) Handles Me.Closed
@@ -45,6 +50,19 @@ Errores:
     End Sub
 
     Sub BotonEliminar()
+
+        Dim agrupacionCargado As Integer
+        sql = "select COUNT(*) from articulo where [id agrupacion] = " & Val(Mid(Me.lstAgrupacion.SelectedItem, 1, 5)) & ""
+        Instruccion = New SqlCommand(sql, DaoCon)
+        agrupacionCargado = Instruccion.ExecuteScalar()
+
+        If (agrupacionCargado > 0) Then
+            MsgBox("No se puede eliminar la agrupacion porque tiene articulo cargado", vbCritical)
+            Me.lstAgrupacion.ClearSelected()
+            Me.BotonLimpiar()
+            Exit Sub
+        End If
+
         Dim OpC As Integer
         On Error GoTo Errores
         OpC = MsgBox("¿Desea eliminar este Registo?", vbYesNo, "Verifique")
@@ -88,15 +106,15 @@ Errores:
         Me.lstAgrupacion.Items.Clear()
         Select Case Orden
             Case 0
-                sql = "select * from agrupacion ORDER BY [id agrupacion]"
+                sql = "select * from agrupacion  WHERE [nom agrupacion] LIKE 'Veliz%' ORDER BY [id agrupacion]"
 
             Case 1
-                sql = "select * from agrupacion ORDER BY [nom agrupacion]"
+                sql = "select * from agrupacion  WHERE [nom agrupacion] LIKE 'Veliz%' ORDER BY [nom agrupacion]"
         End Select
         Instruccion = New SqlCommand(sql, DaoCon)
         Rs = Instruccion.ExecuteReader()
         While Rs.Read
-            Me.lstAgrupacion.Items.Add(Format(Rs(0), "00000") & " " & Rs(1))
+            Me.lstAgrupacion.Items.Add(Format(Rs(0), "00000").PadRight(5, " ") & vbTab & vbTab & vbTab & Rs(1))
         End While
         Rs.Close()
     End Sub
@@ -121,9 +139,7 @@ Errores:
         End If
     End Sub
 
-    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
-        Me.BotonAgregar()
-    End Sub
+
 
     Private Sub Label3_Click(sender As Object, e As EventArgs) Handles Label3.Click
         Me.BotonMostrar(0)
@@ -131,6 +147,32 @@ Errores:
 
     Private Sub Label4_Click(sender As Object, e As EventArgs) Handles Label4.Click
         Me.BotonMostrar(1)
+    End Sub
+
+    Private Sub txtNombreAgrupacion_TextChanged(sender As Object, e As EventArgs) Handles txtNombreAgrupacion.TextChanged
+        Dim texto As String = txtNombreAgrupacion.Text
+        soloLetras(texto)
+    End Sub
+
+
+    Private Sub txtID_Enter(sender As Object, e As EventArgs) Handles txtID.Enter
+        Me.txtID.ReadOnly = True
+        Me.txtID.BackColor = Color.White
+        Me.txtID.TabStop = False
+        SendKeys.Send("{TAB}")
+    End Sub
+
+    Private Sub txtNombreAgrupacion_Enter(sender As Object, e As EventArgs) Handles txtNombreAgrupacion.Enter
+        txtNombreAgrupacion.BackColor = Color.Aquamarine
+    End Sub
+
+
+    Private Sub txtNombreAgrupacion_Leave(sender As Object, e As EventArgs) Handles txtNombreAgrupacion.Leave
+        txtNombreAgrupacion.BackColor = Color.White
+    End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        Me.BotonAgregar()
     End Sub
 
     Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
@@ -143,21 +185,5 @@ Errores:
 
     Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
         Me.BotonEliminar()
-    End Sub
-
-    Private Sub txtNombreAgrupacion_TextChanged(sender As Object, e As EventArgs) Handles txtNombreAgrupacion.TextChanged
-        Dim texto As String = txtNombreAgrupacion.Text
-        soloLetras(texto)
-    End Sub
-
-    Private Sub txtNombreAgrupacion_Enter(sender As Object, e As EventArgs) Handles txtNombreAgrupacion.Enter
-        txtNombreAgrupacion.TextAlign = HorizontalAlignment.Left
-    End Sub
-
-    Private Sub txtID_Enter(sender As Object, e As EventArgs) Handles txtID.Enter
-        Me.txtID.ReadOnly = True
-        Me.txtID.BackColor = Color.White
-        Me.txtID.TabStop = False
-        SendKeys.Send("{TAB}")
     End Sub
 End Class

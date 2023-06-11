@@ -79,12 +79,6 @@
     <Compile Include="frmAgrupacion.vb">
       <SubType>Form</SubType>
     </Compile>
-    <Compile Include="frmAltasYActualizaciones.Designer.vb">
-      <DependentUpon>frmAltasYActualizaciones.vb</DependentUpon>
-    </Compile>
-    <Compile Include="frmAltasYActualizaciones.vb">
-      <SubType>Form</SubType>
-    </Compile>
     <Compile Include="frmArticulos.Designer.vb">
       <DependentUpon>frmArticulos.vb</DependentUpon>
     </Compile>
@@ -129,9 +123,6 @@
   <ItemGroup>
     <EmbeddedResource Include="frmAgrupacion.resx">
       <DependentUpon>frmAgrupacion.vb</DependentUpon>
-    </EmbeddedResource>
-    <EmbeddedResource Include="frmAltasYActualizaciones.resx">
-      <DependentUpon>frmAltasYActualizaciones.vb</DependentUpon>
     </EmbeddedResource>
     <EmbeddedResource Include="frmArticulos.resx">
       <DependentUpon>frmArticulos.vb</DependentUpon>

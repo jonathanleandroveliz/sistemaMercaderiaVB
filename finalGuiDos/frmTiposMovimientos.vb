@@ -4,6 +4,16 @@ Public Class frmTiposMovimientos
         ConectarBase()
         Me.BotonLimpiar()
         Me.txtID.TextAlign = HorizontalAlignment.Right
+        Me.BackColor = Color.Beige
+        Me.lstMovimientos.BackColor = Color.AntiqueWhite
+        Me.GroupBox1.BackColor = Color.AntiqueWhite
+        Me.GroupBox2.BackColor = Color.AntiqueWhite
+        Me.FormBorderStyle = FormBorderStyle.FixedSingle
+    End Sub
+
+    Private Sub frmTiposMovimientos_Closed(sender As Object, e As EventArgs) Handles Me.Closed
+        DaoCon.Close()
+        MsgBox("Conexión Cerrada", vbInformation)
     End Sub
 
     Sub BotonLimpiar()
@@ -48,6 +58,19 @@ Errores:
     End Sub
 
     Sub BotonEliminar()
+
+        Dim movimientoCargado As Integer
+        sql = "select COUNT(*) from movimiento where [id tipomovi] = " & Val(Mid(Me.lstMovimientos.SelectedItem, 1, 5)) & ""
+        Instruccion = New SqlCommand(sql, DaoCon)
+        movimientoCargado = Instruccion.ExecuteScalar()
+
+        If (movimientoCargado > 0) Then
+            MsgBox("No se puede eliminar el tipo de movimiento porque tiene articulos vinculados con el tipo de movimiento", vbCritical)
+            Me.lstMovimientos.ClearSelected()
+            Me.BotonLimpiar()
+            Exit Sub
+        End If
+
         Dim OpC As Integer
         On Error GoTo Errores
         OpC = MsgBox("¿Desea eliminar este Registo?", vbYesNo, "Verifique")
@@ -101,15 +124,15 @@ Errores:
         Me.lstMovimientos.Items.Clear()
         Select Case Orden
             Case 0
-                sql = "select * from tipomovi ORDER BY [id tipomovi]"
+                sql = "select * from tipomovi  WHERE [nom tipomovi] LIKE 'Veliz%' ORDER BY [id tipomovi]"
 
             Case 1
-                sql = "select * from tipomovi ORDER BY [nom tipomovi]"
+                sql = "select * from tipomovi  WHERE [nom tipomovi] LIKE 'Veliz%' ORDER BY [nom tipomovi]"
         End Select
         Instruccion = New SqlCommand(sql, DaoCon)
         Rs = Instruccion.ExecuteReader()
         While Rs.Read
-            Me.lstMovimientos.Items.Add(Format(Rs(0), "00000") & " " & Rs(1) & " " & Rs(2))
+            Me.lstMovimientos.Items.Add(Format(Rs(0), "00000") & vbTab & vbTab & Rs(1).ToString.PadRight(30, " ") & Rs(2))
         End While
         Rs.Close()
     End Sub
@@ -135,21 +158,6 @@ Errores:
         End If
     End Sub
 
-    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
-        BotonAgregar()
-    End Sub
-
-    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
-        BotonLimpiar()
-    End Sub
-
-    Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
-        botonModificar()
-    End Sub
-
-    Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
-        BotonEliminar()
-    End Sub
 
     Private Sub txtID_Enter(sender As Object, e As EventArgs) Handles txtID.Enter
         Me.txtID.ReadOnly = True
@@ -166,5 +174,39 @@ Errores:
     Private Sub txtTipoMovimiento_TextChanged(sender As Object, e As EventArgs) Handles txtTipoMovimiento.TextChanged
         Dim texto As String = Me.txtTipoMovimiento.Text
         soloLetras3(texto)
+    End Sub
+
+    Private Sub txtNomMovimiento_Enter(sender As Object, e As EventArgs) Handles txtNomMovimiento.Enter
+        txtNomMovimiento.BackColor = Color.Aquamarine
+    End Sub
+
+
+    Private Sub txtNomMovimiento_Leave(sender As Object, e As EventArgs) Handles txtNomMovimiento.Leave
+        txtNomMovimiento.BackColor = Color.White
+    End Sub
+
+    Private Sub txtTipoMovimiento_Enter(sender As Object, e As EventArgs) Handles txtTipoMovimiento.Enter
+        txtTipoMovimiento.BackColor = Color.Aquamarine
+    End Sub
+
+
+    Private Sub txtTipoMovimiento_Leave(sender As Object, e As EventArgs) Handles txtTipoMovimiento.Leave
+        txtTipoMovimiento.BackColor = Color.White
+    End Sub
+
+    Private Sub btnAgregar_Click(sender As Object, e As EventArgs) Handles btnAgregar.Click
+        Me.BotonAgregar()
+    End Sub
+
+    Private Sub btnLimpiar_Click(sender As Object, e As EventArgs) Handles btnLimpiar.Click
+        Me.BotonLimpiar()
+    End Sub
+
+    Private Sub btnModificar_Click(sender As Object, e As EventArgs) Handles btnModificar.Click
+        Me.botonModificar()
+    End Sub
+
+    Private Sub btnBorrar_Click(sender As Object, e As EventArgs) Handles btnBorrar.Click
+        Me.BotonEliminar()
     End Sub
 End Class

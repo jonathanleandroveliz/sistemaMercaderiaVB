@@ -1,20 +1,26 @@
 ﻿Imports System.Data.SqlClient
 
+
 Public Class frmArticulos
     Dim flag As Boolean
     Private Sub frmArticulos_Load(sender As Object, e As EventArgs) Handles MyBase.Load
         ConectarBase()
-        Me.BotonLimpiar()
+        BotonLimpiar()
         Me.CargarComboBox()
         Me.txtPrecio.TextAlign = HorizontalAlignment.Right
         Me.txtID.TextAlign = HorizontalAlignment.Right
         Me.txtIDAgrupacion.TextAlign = HorizontalAlignment.Right
+        Me.BackColor = Color.Beige
+        Me.lstArticulos.BackColor = Color.AntiqueWhite
+        Me.GroupBox1.BackColor = Color.AntiqueWhite
+        Me.GroupBox2.BackColor = Color.AntiqueWhite
     End Sub
 
     Private Sub frmArticulos_Closed(sender As Object, e As EventArgs) Handles Me.Closed
         DaoCon.Close()
         MsgBox("Conexión Cerrada", vbInformation)
     End Sub
+
     Sub BotonLimpiar()
         Me.btnBorrar.Enabled = False ' Boton Eliminar
         Me.btnModificar.Enabled = False ' Boton Modificar
@@ -28,6 +34,7 @@ Public Class frmArticulos
         Me.txtNombre.Focus()
         BotonMostrar(0)
     End Sub
+
 
     Sub BotonAgregar()
 
@@ -86,6 +93,17 @@ Errores:
     End Sub
 
     Sub BotonEliminar()
+        Dim arituculoCargado As Integer
+        sql = "select COUNT(*) from movimiento where [id articulo] =" & Val(Mid(Me.lstArticulos.SelectedItem, 1, 5)) & ""
+        Instruccion = New SqlCommand(sql, DaoCon)
+        arituculoCargado = Instruccion.ExecuteScalar()
+
+        If (arituculoCargado > 0) Then
+            MsgBox("No se puede eliminar el articulo porque tiene un movimiento", vbCritical)
+            lstArticulos.ClearSelected()
+            Me.BotonLimpiar()
+            Exit Sub
+        End If
         Me.ComboBox1.Text = ""
         flag = True
         Dim OpC As Integer
@@ -145,15 +163,15 @@ Errores:
         Me.lstArticulos.Items.Clear()
         Select Case Orden
             Case 0
-                sql = "select * from articulo ORDER BY [id articulo]"
+                sql = "select * from articulo WHERE [nom articulo] LIKE 'Veliz%' ORDER BY [id articulo]"
 
             Case 1
-                sql = "select * from articulo ORDER BY [nom articulo]"
+                sql = "select * from articulo  WHERE [nom articulo] LIKE 'Veliz%' ORDER BY [nom articulo]"
         End Select
         Instruccion = New SqlCommand(sql, DaoCon)
         Rs = Instruccion.ExecuteReader()
         While Rs.Read
-            Me.lstArticulos.Items.Add(Format(Rs(0), "00000") & " " & Rs(1) & " " & Rs(2) & " " & Rs(3))
+            Me.lstArticulos.Items.Add(Format(Rs(0), "00000") & vbTab & vbTab & Rs(1).ToString.PadRight(50, " ") & vbTab & Rs(2).ToString.PadRight(5) & vbTab & vbTab & Rs(3).ToString.PadRight(5, " "))
         End While
         Rs.Close()
     End Sub
@@ -161,7 +179,7 @@ Errores:
     Sub CargarComboBox()
         Dim Rs As SqlDataReader
         Me.ComboBox1.Items.Clear()
-        sql = "select * from agrupacion"
+        sql = "select * from agrupacion  WHERE [nom agrupacion] LIKE 'Veliz%' ORDER BY [nom agrupacion]"
         Instruccion = New SqlCommand(sql, DaoCon)
         Rs = Instruccion.ExecuteReader()
         While Rs.Read
@@ -173,7 +191,7 @@ Errores:
     Private Sub lstArticulos_DoubleClick(sender As Object, e As EventArgs) Handles lstArticulos.DoubleClick
         Dim Rs As SqlDataReader
         Dim rs1 As SqlDataReader
-        Dim numeroString As String
+
         If Me.lstArticulos.SelectedItem <> "" Then
             sql = "select * from articulo Where [id articulo]=" & Val(Mid(Me.lstArticulos.SelectedItem, 1, 5)) & ""
             Instruccion = New SqlCommand(sql, DaoCon)
@@ -263,4 +281,23 @@ Errores:
         texto = txtNombre.Text
         soloLetras1(texto)
     End Sub
+
+    Private Sub txtNombre_Enter(sender As Object, e As EventArgs) Handles txtNombre.Enter
+        txtNombre.BackColor = Color.Aquamarine
+    End Sub
+
+
+    Private Sub txtNombre_Leave(sender As Object, e As EventArgs) Handles txtNombre.Leave
+        txtNombre.BackColor = Color.White
+    End Sub
+
+    Private Sub txtPrecio_Enter(sender As Object, e As EventArgs) Handles txtPrecio.Enter
+        txtPrecio.BackColor = Color.Aquamarine
+    End Sub
+
+
+    Private Sub txtPrecio_Leave(sender As Object, e As EventArgs) Handles txtPrecio.Leave
+        txtPrecio.BackColor = Color.White
+    End Sub
+
 End Class
